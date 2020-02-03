@@ -1,0 +1,14 @@
+{
+  "spices": [
+    { "name": "Svartpeppar", "origin": "Indien", "price": 20 },
+    { "name": "Havssalt", "origin": "England", "price": 10 },
+    { "name": "Rosmarin", "origin": "Kroatien", "price": 15 },
+    { "name": "Basilika", "origin": "Egypten", "price": 20 },
+    { "name": "Saffran", "origin": "Iran", "price": 70 },
+    { "name": "Oregano", "origin": "Chile", "price": 15 },
+    { "name": "Kanel", "origin": "Indonesien", "price": 25 },
+    { "name": "Koriander", "origin": "Marocko", "price": 30 },
+    { "name": "Timjan", "origin": "Spanien", "price": 15 },
+    { "name": "Dragon ", "origin": "Frankrike", "price": 25 }
+  ]
+}
