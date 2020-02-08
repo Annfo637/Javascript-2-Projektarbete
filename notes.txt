@@ -1,0 +1,20 @@
+1. Skapa produkt-behållare(article) för varje krydda/produkt
+
+2. Skapa en webbsida som visar ca 10 olika valfria produkter. Produkterna måste hämtas från en JSON-fil.
+
+
+3. Skapa en JSON - fil för att lagra produkterna. Skapa en länk till JSON-filen längst ner på sidan.
+
+
+4. Skapa en varukorg. För G-nivå skall man kunna lägga till en styck av varje produkt i varukorgen.
+
+
+5. Visa produktnamn och pris i varukorgen. Visa totalsumma i varukorgen.
+
+
+6. Lägg till en beställningsknapp i varukorgen. 
+Vid beställning(när kunden klickar på beställningsknappen), visa en bekräftelse på skärmen och töm varukorgen.
+
+
+1. Visa produkter på sidan
+

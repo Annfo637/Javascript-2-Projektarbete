@@ -1,1 +1,30 @@
 /* Importera bootstrap här? */
+
+* {
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1000px;
+}
+
+body {
+	padding: 0 15px;
+}
+
+th {
+	font-size: large;
+}
+td {
+	font-weight: bold;
+}
+.showCartBtn {
+	margin: 10px;
+}
+
+.img-container {
+	height: 70px;
+}
+
+img {
+	max-height: 100%;
+	max-width: 100%;
+}
