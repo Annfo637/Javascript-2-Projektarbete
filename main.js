@@ -4,6 +4,8 @@ $(document).ready(function() {
   //let cartItems = ""; //Varukorgstabellen inkl html-taggar
   //let products = []; JSON-arrayen m objekt
   let cartArray = []; //Array m varukorgens innehåll (produkter) i form av objekt
+  let $updateButtons = [];
+  let deleteButtons = [];
 
   //getJSON
   $.getJSON("products.json", function(products) {
@@ -41,7 +43,7 @@ $(document).ready(function() {
     //4. Sätt innerHTML på div:en med id="products" till variabeln allProducts (ersätter den tomma div-taggen med tabellen som fyllts med alla produkter)
     $("#products").html(allProducts);
 
-    //EVENT LISTENERS
+    //EVENT LISTENERS FÖR STATISKA ELEMENT I PRODUKTLISTAN SAMT VISA/DÖLJ VARUKORG
     //5. Hitta alla "Lägg till-knappar" (blir en sk. HTMLcollection med alla 10 knappar)
     //Lyssna efter klick på alla "lägg till"-knappar, och anropa addToCart
 
@@ -55,22 +57,22 @@ $(document).ready(function() {
     }
     //6. Hitta alla antal-input och skapa lyssnare för dem, anropa addQty som lägger till värdet i objektet
     const itemQuantityFields = document.getElementsByClassName("quantity");
-    console.log(itemQuantityFields);
+    //console.log(itemQuantityFields);
 
     for (let i = 0; i < itemQuantityFields.length; i++) {
       itemQuantityFields[i].addEventListener("change", function() {
         addQty(itemQuantityFields[i].id, itemQuantityFields[i].value);
+        //itemQuantityFields[i].value = null;
       });
     }
-    //7. skapa lyssnare för + och - knappar som anropar changeQty
-    const updateButtons = document.getElementsByClassName(
-      "plusOne",
-      "minusOne"
-    );
-    console.log(updateButtons);
 
     //8. Hitta alla "Ta bort"-knappar och skapa lyssnare för dem, anropa removeFromCart
-
+    //let deleteButtons = [];
+    for (let i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener("click", function() {
+        removeFromCart(deleteButtons[i].id);
+      });
+    }
     //9. skapa lyssnare för beställningsknapp som anropar sendOrder()
 
     //SHOPPING CART
@@ -94,9 +96,9 @@ $(document).ready(function() {
       cartArray.forEach(product => {
         cartItems += `<tr>						
                           <td>${product.name}</td>
-                          <td><button type="button" id="${product.id}" class="plusOne">➕</button>  
+                          <td><button type="button" id="${product.id}" class="plusOne changeQty">➕</button>  
                           ${product.qty}  
-                          <button type="button" id="${product.id}" class="minusOne">➖</button></td>
+                          <button type="button" id="${product.id}" class="minusOne changeQty">➖</button></td>
                           <td>${product.price} SEK</td>
                           <td><button type="button" id="${product.id}" class="removeProductBtn">Ta bort</button></td>
                         </tr>
@@ -108,6 +110,22 @@ $(document).ready(function() {
       console.log(cartItems);
       //13. Lägg till tabellen i DOM:en
       document.getElementById("cartItems").innerHTML = cartItems;
+
+      //Allt som har förändrats i varukorgon (dvs element som inte är statiska)
+      //behöver hanteras i samband med drawCart()
+
+      //lägg in plus/minusknappar i variabeln updateButtons och skapa lyssnare som anropar changeQty
+      $updateButtons = $(".changeQty");
+      console.log($updateButtons);
+      $updateButtons.each(function() {
+        $(this).on("click", function() {
+          console.log(this);
+          changeQty(this);
+        });
+      });
+
+      //samma för "ta bort"-knapparna
+      deleteButtons = document.getElementsByClassName("removeProductBtn");
     }
 
     //Räcker det att spara till localstorage, och sedan hämta datan till varukorgen därifrån? I vilken ordning ska saker ske?
@@ -123,6 +141,7 @@ $(document).ready(function() {
           console.log(cartArray);
           drawCart();
           //töm objektets qty-fält
+          itemQuantityFields[i].value = null;
         }
         //Lägg till objektet i local storage
       }
@@ -139,6 +158,7 @@ $(document).ready(function() {
     }
 
     //17. Funktioner för att ändra antal på produkt
+    //innan produkten läggs till i varukorg
     function addQty(id, qty) {
       for (let i = 0; i < products.length; i++) {
         if (id == products[i].id) {
@@ -146,8 +166,35 @@ $(document).ready(function() {
         }
       }
     }
-    function changeQty(buttonId) {
-      //kod
+
+    //på befintlig produkt i varukorg
+    function changeQty(button) {
+      $button = button;
+
+      for (let i = 0; i < products.length; i++) {
+        if ($button.id == products[i].id) {
+          console.log($button.id);
+          console.log(products[i].id);
+          let qty = parseInt(products[i].qty);
+          console.log(qty);
+
+          if ($(button).hasClass("plusOne")) {
+            qty++;
+            products[i].qty = qty;
+            cartArray.splice([i], 1, products[i]);
+            console.log(products[i].qty);
+          } else if ($(button).hasClass("minusOne")) {
+            qty--;
+            products[i].qty = qty;
+            cartArray.splice([i], 1, products[i]);
+            console.log(products[i].qty);
+          } else {
+            alert("Something wrong");
+          }
+        }
+      }
+
+      drawCart();
     }
 
     //18. Funktion för beställningsbekräftelse
