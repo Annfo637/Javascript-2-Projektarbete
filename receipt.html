@@ -1,7 +1,44 @@
-<!--kan även döpas till checkout.html?
-
-Här ska hela kvitto med detaljer och totalsumma
- visas efter att användaren klickat på beställ
-
-Kan eventuellt räcka att visa detta som en alert?  alert("Tack för din beställning")
--->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Orderbekräftelse</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Orderbekräftelse</h1>
+      <br />
+    </header>
+    <main>
+      <section id="orderReceipt">
+        <h2>Tack för din beställning!</h2>
+        <br />
+        <div id="orderedProducts"></div>
+        <!--Här (inuti div-taggen ovan) visas beställda produkter-->
+        <button type="button" id="back">
+          <a href="index.html" title="Startsidan"> Tillbaka till startsidan </a>
+        </button>
+        <br /><br />
+      </section>
+    </main>
+    <footer>
+      <hr />
+      <p>Copyright &copy SpiceFends2020</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
