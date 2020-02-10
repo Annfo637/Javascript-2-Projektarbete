@@ -2,12 +2,12 @@ $(document).ready(function() {
   //initiera variabler, ska vi göra detta eller inte? Vad tycker du?
   //let allProducts = ""; //Produkttabellen inkl html-taggar
   //let products = []; JSON-arrayen m objekt
+  let $storedArray = [];
   const $cart = $("#cartItems"); //div-elementet som innehåller varukorgen
   let $cartItems = ""; //Varukorgstabellen inkl html-taggar
   let $cartArray = []; //Array m varukorgens innehåll (produkter) i form av objekt
   let $updateButtons = [];
   let $deleteButtons = [];
-  let totalPrice = 0;
   //$addProductsButtons = $(".addProductBtn");
 
   $.getJSON("products.json", function(products) {
@@ -69,9 +69,6 @@ $(document).ready(function() {
     //DEL 2. SHOPPING CART
     //2.1 Funktion som ritar upp varukorgen i DOM:en
     function drawCart() {
-      //totalPrice = totalPrice($cartArray);
-      //console.log(totalPrice);
-
       $cartItems = "";
       $cartItems += `<h3>Din varukorg</h3><table class="table table-striped table-hover"><thead class="thead-light">
         <tr>
@@ -94,8 +91,9 @@ $(document).ready(function() {
               `;
       });
       $cartItems += "</table>";
-      //totalPrice($cartArray);
-      $cartItems += `<h3>Totalsumma: ${totalPrice($cartArray)} kr </h3>`;
+      $cartItems += `<h3 class="alignRight">Totalsumma: ${totalPrice(
+        $cartArray
+      )} kr </h3>`;
       $cartItems +=
         "<button type='button' class='sendOrderBtn'><i class='fa fa-arrow-right'></i> Skicka beställning </button>";
       $cartItems +=
@@ -149,7 +147,6 @@ $(document).ready(function() {
 
     function totalPrice(arr) {
       let outputPrice = 0;
-      console.log(arr);
 
       for (let i = 0; i < arr.length; i++) {
         const qty = parseInt(arr[i].qty);
@@ -160,7 +157,6 @@ $(document).ready(function() {
       /*$cartArray.each(function() {
         outputPrice += this.qty * this.price;
       });*/
-      console.log(outputPrice);
 
       return outputPrice;
     }
@@ -232,7 +228,7 @@ $(document).ready(function() {
     //3.5 Töm varukorgen, används både vid "töm varukorgen" och "skicka beställning"
     function emptyCart() {
       $cartArray = [];
-      localStorage.clear();
+      //localStorage.clear();
       drawCart();
     }
 
@@ -240,7 +236,7 @@ $(document).ready(function() {
     function sendOrder() {
       alert("Din order skickas");
       window.open("receipt.html");
-      $("#orderedProducts").html("Test");
+      console.log($("#orderedProducts")); //kommer inte åt att selecta element i receipt.html?
       emptyCart();
       //OBS! VG-nivå: Funktion som visar orderöversikt på ny sida
     }
@@ -251,7 +247,7 @@ $(document).ready(function() {
       localStorage.setItem("storedItems", JSON.stringify($cartArray)); //Spara arrayen i localStorage
 
       //Eventuellt överflödigt att hämta arrayen från localstorage? Ta i sådana fall bort koden nedan
-      let $storedArray = JSON.parse(localStorage.getItem("storedItems"));
+      $storedArray = JSON.parse(localStorage.getItem("storedItems"));
       console.log($storedArray);
     }
 
