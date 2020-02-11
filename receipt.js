@@ -25,7 +25,6 @@ $orderedProducts += "</table>";
 $orderedProducts += `<h3 class="alignRight">Totalsumma: ${totalPrice(
   $receiptArray
 )} kr </h3>`;
-//	$cartArray = [] //varför har vi kommenterat ut den här?*/
 $("#orderedProducts").html($orderedProducts);
 
 function totalPrice(arr) {
