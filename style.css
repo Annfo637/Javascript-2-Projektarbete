@@ -7,14 +7,25 @@
 }
 
 body {
-  padding: 0 15px;
+  font-family: "montserrat", sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+h1 {
+  margin-top: 30px;
+}
 th {
-  font-size: large;
+  font-size: 18px;
+  font-weight: bolde;
 }
 td {
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 img {
@@ -23,7 +34,7 @@ img {
 }
 
 .img-container {
-  height: 70px;
+  height: 55px;
 }
 
 .showCartBtn {
@@ -35,8 +46,3 @@ img {
   margin-right: 10px;
   margin-top: 10px;
 }
-
-/*.alignRight {
-  position: absolute;
-  right: 15px;
-}*/
